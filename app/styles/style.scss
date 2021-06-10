@@ -1,0 +1,14 @@
+@import "./grid";
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+button,
+input,
+textarea,
+select {
+  outline: none;
+  box-shadow: none;
+}
