@@ -1,8 +1,12 @@
+@import "./component/index";
+@import "./utilities/index";
 @import "./grid";
+@import "./variables";
 
 * {
   padding: 0;
   margin: 0;
+  box-sizing: border-box;
 }
 
 button,
@@ -11,4 +15,24 @@ textarea,
 select {
   outline: none;
   box-shadow: none;
+}
+
+div {
+  width: calc(100% - (2 * $margin));
+  padding: 0 50px;
+}
+
+.tabs {
+  width: 200px;
+  height: 48px;
+  background-color: blue;
+  padding: 4px;
+  clip-path: polygon(93% 0, 100% 50%, 93% 100%, 0% 100%, 6% 50%, 0% 0%);
+  cursor: pointer;
+  &__content {
+    background-color: #fff;
+    width: 100%;
+    height: 100%;
+    clip-path: polygon(94% 0, 100% 50%, 94% 100%, 2% 100%, 8% 50%, 2% 0%);
+  }
 }

@@ -1,0 +1,9 @@
+@for $i from 1 through 5 {
+  .mr-#{$i} {
+    margin-right: $i * 5px;
+  }
+
+  .ml-#{$i} {
+    margin-left: $i * 5px;
+  }
+}

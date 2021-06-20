@@ -1,0 +1,15 @@
+@use "../colors" as *;
+
+$fontsizes: (
+  "12": 12px,
+  "14": 14px,
+  "16": 16px,
+  "18": 18px
+);
+
+@each $name, $value in $fontsizes {
+  .fs-#{$name} {
+    font-size: $value;
+    color: $blue;
+  }
+}
