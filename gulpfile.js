@@ -6,6 +6,17 @@ const rename = require("gulp-rename");
 const browserSync = require("browser-sync").create();
 const runSequence = require("gulp4-run-sequence");
 
+gulp.task("html", function () {
+  return gulp
+    .src("app/*.html")
+    .pipe(gulp.dest("dist"))
+    .pipe(
+      browserSync.reload({
+        stream: true
+      })
+    );
+});
+
 gulp.task("sass", function () {
   return (
     gulp
@@ -18,7 +29,7 @@ gulp.task("sass", function () {
           path.extname = ".min.css";
         })
       )
-      .pipe(gulp.dest("app/styles"))
+      .pipe(gulp.dest("dist/css"))
       .pipe(
         browserSync.reload({
           stream: true
@@ -34,27 +45,32 @@ gulp.task("js", function () {
       minify({
         ext: {
           min: ".min.js"
-        },
-        ignoreFiles: ["-min.js"]
+        }
+        // ignoreFiles: ["-min.js"]
       })
     )
-    .pipe(gulp.dest("app/js"));
+    .pipe(gulp.dest("dist/js"))
+    .pipe(
+      browserSync.reload({
+        stream: true
+      })
+    );
 });
 
 gulp.task("browserSync", function () {
   browserSync.init({
     server: {
-      baseDir: "app"
+      baseDir: "dist"
     }
   });
 });
 
 gulp.task("watch", function () {
-  gulp.watch("app/*.html", browserSync.reload);
+  gulp.watch("app/*.html", gulp.series("html"));
   gulp.watch("app/styles/**/*.scss", gulp.series("sass"));
-  gulp.watch("app/js/**/*.js", browserSync.reload);
+  gulp.watch("app/js/**/*.js", gulp.series("js"));
 });
 
 gulp.task("run", function (callback) {
-  runSequence(["sass", "watch", "browserSync"], callback);
+  runSequence(["sass", "js", "html", "watch", "browserSync"], callback);
 });

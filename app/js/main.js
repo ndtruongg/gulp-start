@@ -1,3 +1,3 @@
-let body = document.querySelector(".body");
+let main = "From main js";
 
-console.log(body);
+console.log(main);
